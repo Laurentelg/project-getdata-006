@@ -78,3 +78,5 @@ names(X) <- c("Subject.Id","Activity",
               "fBodyBodyGyroJerkMag-mean()","fBodyBodyGyroJerkMag-std()")
 
 # # ---------- Step 5 : Creating a second, independent tidy data set with the average of each variable for each activity and each subject. 
+
+## test commit
