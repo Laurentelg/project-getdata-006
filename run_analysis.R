@@ -4,7 +4,7 @@
 
 #Common data 
 #Loading the activity labels
-activity_labels <- read.table("./activity_labels.txt",stringsAsFactors = FALSE)
+#activity_labels <- read.table("./activity_labels.txt",stringsAsFactors = FALSE)
 #Test Data  
 #Loading the test data set X_test.txt
 X_test <- read.table("./test/X_test.txt",stringsAsFactors = FALSE)
@@ -41,6 +41,8 @@ X_train <- cbind(subject_train,X_train)
 X <- rbind(X_test,X_train)
 
 ## -------- Step 2 : Extracts only the measurements on the mean and standard deviation for each measurement.
+## I have chosen only the faetures that ends with mean() and std() in their names (including features that ends 
+## with spatial coordinates)
 X <- X[,c(1,2,3,4,5,6,7,8,43,44,45,46,47,48,83,84,85,86,87,88,123,124,125,126,127,128,163,164,165,166,167,168,203,204,216,217,229,230,242,243,255,256,268,269,270,271,272,273,347,348,349,350,351,352,426,427,428,429,430,431,505,506,518,519,531,532,544,545)]
 ## -------- Step 3 : Replacing the activity labels by their names
 X$Activity.Id[X$Activity.Id == 1] <- "WALKING"
@@ -79,4 +81,17 @@ names(X) <- c("Subject.Id","Activity",
 
 # # ---------- Step 5 : Creating a second, independent tidy data set with the average of each variable for each activity and each subject. 
 
-## test commit
+## tapply(X_temp$X,list(X_temp$SID,X_temp$ACT),mean)
+head(aggregate(X_temp$X,list(id = X_temp$SID,act = X_temp$ACT),mean))
+
+##Using melt and cast to run the mean on the full data set 
+#First installing the reshape package
+install.packages("reshape")
+#Loading the library
+library("reshape")
+#Melting X
+X_mt <- melt(X,id=(c("Subject.Id","Activity")))
+#Casting with mean as aggregation
+X_tidy <- cast(X_mt,Subject.Id+Activity ~ variable,mean)
+#Writting the clean data set to a file named : tidy_data_set.txt
+write.table(X_tidy,file="tidy_data_set.txt",row.names=FALSE)
