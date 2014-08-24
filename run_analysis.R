@@ -81,12 +81,9 @@ names(X) <- c("Subject.Id","Activity",
 
 # # ---------- Step 5 : Creating a second, independent tidy data set with the average of each variable for each activity and each subject. 
 
-## tapply(X_temp$X,list(X_temp$SID,X_temp$ACT),mean)
-head(aggregate(X_temp$X,list(id = X_temp$SID,act = X_temp$ACT),mean))
-
 ##Using melt and cast to run the mean on the full data set 
 #First installing the reshape package
-install.packages("reshape")
+#install.packages("reshape")
 #Loading the library
 library("reshape")
 #Melting X
