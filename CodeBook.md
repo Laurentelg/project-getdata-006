@@ -12,7 +12,9 @@
     - STANDING
     - LAYING
 
+
 --> NOTE :  All the values below are an average of the raw data by unique activity and participant (example : All the raw values for participant 1 SITTING are averaged to only form one row)
+See feature_info.txt for the detailled explanation of each value. 
 
 - tBodyAcc-mean()-X
 - tBodyAcc-mean()-Y
